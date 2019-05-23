@@ -1,25 +1,31 @@
 // Store our API endpoint inside queryUrl
 var today = new Date();
-var start = Date(today.setDate(today.getDate()-30));
+var start = new Date();
+start.setMonth(start.getMonth() - 1)
+
 
 function buildUrl(){
     let
         domain = "earthquake.usgs.gov",
         endpoint = "/fdsnws/event/1/query",
         format = "geojson",
-        starttime = start.toISOString().slice(0,10),
         endtime = today.toISOString().slice(0,10),
+        starttime = start.toISOString().slice(0,10),
         maxLon = -69.52148437,
         minLon = -123.83789062,
         maxLat = 48.74894534,
         minLat = 25.16517337;
+        console.log(starttime);
+        console.log(endtime);
 
     return `https://${domain}${endpoint}?format=${format}&starttime=${starttime}&endtime=${endtime}&maxlongitude=${maxLon}&minlongitude=${minLon}&maxlatitude=${maxLat}&minlatitude=${minLat}`;
 }
 
 
-console.log(start)
-console.log(today);
+// console.log(today.toLocaleDateString());
+// console.log(start);
+// console.log(typeof today);
+// console.log(typeof start);
 // url = buildUrl()
 // console.log(url);
 
